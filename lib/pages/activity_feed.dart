@@ -34,7 +34,7 @@ class _ActivityFeedState extends State<ActivityFeed>
     super.build(context);
     return Scaffold(
       backgroundColor: Colors.orange,
-      appBar: header(context, titleText: "Activity Feed"),
+      appBar: header(context, titleText: "Hoạt Động"),
       body: Container(
           child: FutureBuilder(
         future: getActivityFeed(),
@@ -127,11 +127,11 @@ class ActivityFeedItem extends StatelessWidget {
     }
 
     if (type == 'like') {
-      activityItemText = "liked your post";
+      activityItemText = "đã thích bài viết";
     } else if (type == 'follow') {
-      activityItemText = "is following you";
+      activityItemText = "đang theo dõi bạn";
     } else if (type == 'comment') {
-      activityItemText = 'replied: $commentData';
+      activityItemText = 'đã trả lời: $commentData';
     } else {
       activityItemText = "Error: Unknown type '$type'";
     }

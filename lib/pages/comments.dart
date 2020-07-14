@@ -85,7 +85,7 @@ class CommentsState extends State<Comments> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: header(context, titleText: "Comments"),
+      appBar: header(context, titleText: "Bình Luận"),
       body: Column(
         children: <Widget>[
           Expanded(child: buildComments()),
@@ -93,12 +93,12 @@ class CommentsState extends State<Comments> {
           ListTile(
             title: TextFormField(
               controller: commentController,
-              decoration: InputDecoration(labelText: "Write a comment..."),
+              decoration: InputDecoration(labelText: "Bình luận..."),
             ),
             trailing: OutlineButton(
               onPressed: addComment,
               borderSide: BorderSide.none,
-              child: Text("Post"),
+              child: Text("Bài"),
             ),
           ),
         ],

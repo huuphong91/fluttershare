@@ -1,11 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
-import 'package:fluttershare/injection.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/home.dart';
 import 'package:fluttershare/widgets/progress.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class EditProfile extends StatefulWidget {
   final String currentUserId;
@@ -24,7 +22,6 @@ class _EditProfileState extends State<EditProfile> {
   User user;
   bool _displayNameValid = true;
   bool _bioValid = true;
-  GoogleSignIn googleSignIn = getIt.get<GoogleSignIn>();
 
   @override
   void initState() {
@@ -52,14 +49,14 @@ class _EditProfileState extends State<EditProfile> {
         Padding(
             padding: EdgeInsets.only(top: 12.0),
             child: Text(
-              "Tên hiển thị",
+              "Tên Hiển Thị",
               style: TextStyle(color: Colors.grey),
             )),
         TextField(
           controller: displayNameController,
           decoration: InputDecoration(
-            hintText: "Cập nhật tên hiển thị",
-            errorText: _displayNameValid ? null : "Tên hiển thị quá ngắn",
+            hintText: "Sửa Tên Hiển Thị",
+            errorText: _displayNameValid ? null : "Quá ngắn",
           ),
         )
       ],
@@ -73,7 +70,7 @@ class _EditProfileState extends State<EditProfile> {
         Padding(
           padding: EdgeInsets.only(top: 12.0),
           child: Text(
-            "Bio",
+            "Tiểu sử",
             style: TextStyle(color: Colors.grey),
           ),
         ),
@@ -81,7 +78,7 @@ class _EditProfileState extends State<EditProfile> {
           controller: bioController,
           decoration: InputDecoration(
             hintText: "Cập nhật tiểu sử",
-            errorText: _bioValid ? null : "Tiểu sử quá ngắn",
+            errorText: _bioValid ? null : "Tiểu sử dài dòng",
           ),
         )
       ],
@@ -104,14 +101,14 @@ class _EditProfileState extends State<EditProfile> {
         "displayName": displayNameController.text,
         "bio": bioController.text,
       });
-      SnackBar snackbar = SnackBar(content: Text("Đã cập nhật!"));
+      SnackBar snackbar = SnackBar(content: Text("Đã sửa!"));
       _scaffoldKey.currentState.showSnackBar(snackbar);
     }
   }
 
   logout() async {
     await googleSignIn.signOut();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+    Navigator.pop(context);
   }
 
   @override
@@ -121,7 +118,7 @@ class _EditProfileState extends State<EditProfile> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          "Sửa Profile",
+          "Sửa Thông Tin",
           style: TextStyle(
             color: Colors.black,
           ),
@@ -167,7 +164,7 @@ class _EditProfileState extends State<EditProfile> {
                       RaisedButton(
                         onPressed: updateProfileData,
                         child: Text(
-                          "Cập nhật Profile",
+                          "Sửa Thông Tin",
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontSize: 20.0,
@@ -181,7 +178,7 @@ class _EditProfileState extends State<EditProfile> {
                           onPressed: logout,
                           icon: Icon(Icons.cancel, color: Colors.red),
                           label: Text(
-                            "Thoát",
+                            "ĐĂNG XUẤT",
                             style: TextStyle(color: Colors.red, fontSize: 20.0),
                           ),
                         ),
